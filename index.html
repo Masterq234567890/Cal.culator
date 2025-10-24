@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Simple Calculator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Logo Top Right -->
+  <div class="logo-container">
+    <img src="logo.png" alt="Logo" class="logo-glow">
+  </div>
+  
+  <!-- Main menu -->
+  <div class="main-menu" id="mainMenu">
+    <button class="glow-btn menu-btn" onclick="openCalculator()">Simple Calculator</button>
+  </div>
+
+  <!-- Calculator Center -->
+  <div class="center-container" id="calculatorSection" style="display: none;">
+    <div class="calculator-container">
+      <input type="text" id="display" disabled />
+      <div class="calc-btns">
+        <button onclick="addToDisplay('7')" class="glow-btn">7</button>
+        <button onclick="addToDisplay('8')" class="glow-btn">8</button>
+        <button onclick="addToDisplay('9')" class="glow-btn">9</button>
+        <button onclick="addToDisplay('/')" class="glow-btn">/</button>
+        <button onclick="addToDisplay('4')" class="glow-btn">4</button>
+        <button onclick="addToDisplay('5')" class="glow-btn">5</button>
+        <button onclick="addToDisplay('6')" class="glow-btn">6</button>
+        <button onclick="addToDisplay('*')" class="glow-btn">*</button>
+        <button onclick="addToDisplay('1')" class="glow-btn">1</button>
+        <button onclick="addToDisplay('2')" class="glow-btn">2</button>
+        <button onclick="addToDisplay('3')" class="glow-btn">3</button>
+        <button onclick="addToDisplay('-')" class="glow-btn">-</button>
+        <button onclick="addToDisplay('0')" class="glow-btn">0</button>
+        <button onclick="addToDisplay('.')" class="glow-btn">.</button>
+        <button onclick="addToDisplay('+')" class="glow-btn">+</button>
+        <button onclick="calculate()" class="glow-btn equals">=</button>
+      </div>
+    </div>
+  </div>
+  
+  <footer>
+    Created By Mr Master
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
