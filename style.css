@@ -13,7 +13,6 @@ body {
   padding: 12px 24px 0 0;
   box-sizing: border-box;
 }
-
 .logo-glow {
   width: 54px;
   height: 54px;
@@ -23,6 +22,7 @@ body {
   object-fit: cover;
   background: #fff;
 }
+
 
 .main-menu {
   width: 100vw;
