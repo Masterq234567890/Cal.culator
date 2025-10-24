@@ -38,6 +38,8 @@ body {
   padding: 22px 0;
   border-radius: 30px;
   letter-spacing: 1px;
+  background: linear-gradient(110deg, #2af598, #009efd);
+  box-shadow: 0 0 14px #e7e7e7;
 }
 
 .center-container {
@@ -62,28 +64,31 @@ body {
 
 #display {
   width: 92%;
-  height: 54px;
-  padding: 10px 10px;
+  height: 48px;
+  padding: 10px 10px 0 10px;
   font-size: 26px;
-  background: #ededed;
-  color: #222;
-  border: 1.5px solid #c9c9cb;
-  margin-bottom: 4px;
-  border-radius: 12px;
+  background: #18191a;
+  color: #fff;
+  border: 1.5px solid #dedede;
+  margin-bottom: 0px;
+  border-radius: 15px 15px 0 0;
   text-align: right;
   outline: none;
 }
 
-.result-display {
+.preview {
   width: 92%;
   min-height: 22px;
-  font-size: 20px;
-  color: #858585;
-  background: none;
+  background: #171717;
+  color: #cfcfcf;
+  font-size: 18px;
+  opacity: 0.7;
+  border-radius: 0 0 15px 15px;
   text-align: right;
-  margin-bottom: 8px;
-  opacity: 0.8;
-  font-family: inherit;
+  margin-bottom: 15px;
+  padding: 3px 10px 6px 0;
+  letter-spacing: 1px;
+  font-weight: 600;
 }
 
 .calc-btns {
@@ -92,81 +97,83 @@ body {
   gap: 13px;
 }
 
-/* Numbers */
+/* Number buttons with unique gradient */
 .num-btn {
-  background: linear-gradient(120deg, #37dadc, #9fffa6, #2d5fff, #4588ff);
+  font-size: 21px;
+  font-weight: 600;
   color: #fff;
-  animation: numGlow 4s linear infinite;
-}
-@keyframes numGlow {
-  0% {background-position: 0% 50%;}
-  50% {background-position: 100% 50%;}
-  100% {background-position: 0% 50%;}
-}
-
-/* Operators (+, −, ÷, ×) */
-.op-btn {
-  background: linear-gradient(120deg, #fa8d1a, #f85032, #f16f62);
-  color: #fff;
-  animation: opGlow 4s linear infinite;
-}
-@keyframes opGlow {
-  0% {background-position: 0% 50%;}
-  50% {background-position: 100% 50%;}
-  100% {background-position: 0% 50%;}
+  border: none;
+  border-radius: 12px;
+  padding: 14px 0;
+  background: linear-gradient(145deg, #4bcffa, #7df89d, #FFD360, #fa7777);
+  background-size: 230% 350%;
+  animation: numGlow 3s linear infinite;
+  transition: transform 0.12s, background 0.3s;
+  box-shadow: 0 0 8px #bce8f4 inset;
 }
 
-/* Equals */
-.equals {
-  background: linear-gradient(120deg, #26d0ce, #ffec6e, #96e6a1);
-  color: #222;
-  font-weight: 700;
-  grid-column: span 1;
-  animation: eqGlow 3s ease-in-out infinite;
-}
-@keyframes eqGlow {
-  0% {background-position: 15% 23%;}
-  50% {background-position: 100% 100%;}
-  100% {background-position: 15% 23%;}
+@keyframes numGlow { 
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
 }
 
-/* Delete (X) */
-.delete {
-  background: linear-gradient(90deg, #ff6363, #d80032);
-  color: #fff;
-  font-weight: 700;
-  animation: delGlow 3s ease-in-out infinite;
-}
-@keyframes delGlow {
-  0% {background-position: 0% 0%;}
-  50% {background-position: 100% 100%;}
-  100% {background-position: 0% 0%;}
-}
-
-/* Clear (C) */
-.clear {
-  background: linear-gradient(90deg, #92a3fd, #9dceff, #65c7f7);
-  color: #191970;
-  font-weight: 700;
-  animation: clrGlow 3s ease-in-out infinite;
-}
-@keyframes clrGlow {
-  0% {background-position: 0% 50%;}
-  50% {background-position: 100% 50%;}
-  100% {background-position: 0% 50%;}
-}
-
-.glow-btn {
+/* Sign buttons */
+.sign-btn {
   font-size: 21px;
   font-weight: 600;
   border: none;
   border-radius: 12px;
   padding: 14px 0;
-  background-size: 360% 360%;
-  box-shadow: 0 0 6px #15d9ee, 0 0 8px #ffbe76 inset;
+  background: linear-gradient(125deg, #282828, #4d4d4d, #444 100%);
+  color: #fff;
+  animation: signColour 2.5s ease-in-out infinite;
+  box-shadow: 0 0 8px #dedede inset;
   transition: transform 0.12s, background 0.3s;
 }
-.glow-btn:active {
+
+@keyframes signColour {
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+
+/* Equals (=) button - brownish */
+.equals-btn {
+  background: linear-gradient(110deg, #b37830, #82491e, #d88c2d, #f7ce68 90%);
+  color: #fff;
+  font-weight: bold;
+  font-size: 22px;
+  border-radius: 12px;
+  box-shadow: 0 0 6px #bc9877 inset;
+  animation: equalsGlow 3s ease-in-out infinite;
+  grid-column: span 1;
+  transition: transform 0.12s, background 0.3s;
+}
+@keyframes equalsGlow {
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+
+/* Delete/clear buttons - red */
+.delete-btn, .clear-btn {
+  background: linear-gradient(110deg, #d7263d, #f46036 90%);
+  color: #fff;
+  font-weight: bold;
+  font-size: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 7px #fdadad inset;
+  animation: cDelGlow 2s ease-in-out infinite;
+  transition: transform 0.12s, background 0.3s;
+}
+@keyframes cDelGlow {
+  0% {background-position: 0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+
+.num-btn:active, .sign-btn:active, .equals-btn:active, .delete-btn:active, .clear-btn:active {
   transform: scale(0.96);
 }
 
@@ -191,10 +198,8 @@ footer {
     min-width: unset;
     padding: 10px 2vw 6px 2vw;
   }
-  #display {
-    width: 97%;
-    font-size: 21px;
-  }
+  #display { width: 97%; font-size: 21px; }
+  .preview { width: 97%; font-size: 15px;}
   .calc-btns { grid-template-columns: repeat(4, 22vw); }
   .menu-btn { width: 92vw; font-size: 24px;}
 }
