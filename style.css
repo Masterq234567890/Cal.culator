@@ -68,10 +68,21 @@ body {
   background: #ededed;
   color: #222;
   border: 1.5px solid #c9c9cb;
-  margin-bottom: 14px;
+  margin-bottom: 5px;
   border-radius: 12px;
   text-align: right;
   outline: none;
+}
+
+.live-total {
+  width: 92%;
+  min-height: 25px;
+  text-align: right;
+  color: #888;
+  font-size: 20px;
+  margin-bottom: 8px;
+  font-family: 'Arial', sans-serif;
+  opacity: 0.6;
 }
 
 .calc-btns {
@@ -143,7 +154,7 @@ footer {
     min-width: unset;
     padding: 10px 2vw 6px 2vw;
   }
-  #display {
+  #display, .live-total {
     width: 97%;
     font-size: 21px;
   }
