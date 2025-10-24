@@ -68,21 +68,22 @@ body {
   background: #ededed;
   color: #222;
   border: 1.5px solid #c9c9cb;
-  margin-bottom: 7px;
+  margin-bottom: 4px;
   border-radius: 12px;
   text-align: right;
   outline: none;
 }
 
-.sub-display {
+.result-display {
   width: 92%;
   min-height: 22px;
-  color: #888;
-  font-size: 18px;
+  font-size: 20px;
+  color: #858585;
+  background: none;
   text-align: right;
   margin-bottom: 8px;
-  letter-spacing: 1px;
-  opacity: 0.9;
+  opacity: 0.8;
+  font-family: inherit;
 }
 
 .calc-btns {
@@ -91,67 +92,82 @@ body {
   gap: 13px;
 }
 
-/* Number buttons: Cyan, blue to purple changing */
+/* Numbers */
 .num-btn {
-  background: linear-gradient(120deg, #00eaff, #1687e8, #a259f7, #44ffd1);
-  background-size: 300% 300%;
-  animation: numBtnGlow 4s linear infinite;
-  color: #fff !important;
-}
-
-/* Signs: dark black, blue glow */
-.sign-btn {
-  background: linear-gradient(120deg, #23272f, #44547a, #333e47);
-  box-shadow: 0 0 4px #2fbfff, 0 0 10px #abb9d2 inset;
-  color: #fbe9c2 !important;
-  background-size: 280% 280%;
-  animation: signBtnGlow 3s linear infinite;
-}
-
-/* Equals: brown-orange-yellow changing */
-.equals-btn {
-  background: linear-gradient(115deg, #a66d3a, #d1b059, #f3ca9b, #e29538);
+  background: linear-gradient(120deg, #37dadc, #9fffa6, #2d5fff, #4588ff);
   color: #fff;
-  background-size: 200% 200%;
-  animation: eqBtnGlow 6s linear infinite;
+  animation: numGlow 4s linear infinite;
+}
+@keyframes numGlow {
+  0% {background-position: 0% 50%;}
+  50% {background-position: 100% 50%;}
+  100% {background-position: 0% 50%;}
 }
 
-/* Clear & Delete: Bright red-pink changing */
-.clear-btn, .delete-btn {
-  background: linear-gradient(100deg, #F64646, #ff0057, #f59595, #e06238);
-  color: #fff !important;
-  background-size: 290% 290%;
-  animation: clearBtnGlow 2.8s linear infinite;
+/* Operators (+, −, ÷, ×) */
+.op-btn {
+  background: linear-gradient(120deg, #fa8d1a, #f85032, #f16f62);
+  color: #fff;
+  animation: opGlow 4s linear infinite;
+}
+@keyframes opGlow {
+  0% {background-position: 0% 50%;}
+  50% {background-position: 100% 50%;}
+  100% {background-position: 0% 50%;}
 }
 
-/* Glow Button Common */
+/* Equals */
+.equals {
+  background: linear-gradient(120deg, #26d0ce, #ffec6e, #96e6a1);
+  color: #222;
+  font-weight: 700;
+  grid-column: span 1;
+  animation: eqGlow 3s ease-in-out infinite;
+}
+@keyframes eqGlow {
+  0% {background-position: 15% 23%;}
+  50% {background-position: 100% 100%;}
+  100% {background-position: 15% 23%;}
+}
+
+/* Delete (X) */
+.delete {
+  background: linear-gradient(90deg, #ff6363, #d80032);
+  color: #fff;
+  font-weight: 700;
+  animation: delGlow 3s ease-in-out infinite;
+}
+@keyframes delGlow {
+  0% {background-position: 0% 0%;}
+  50% {background-position: 100% 100%;}
+  100% {background-position: 0% 0%;}
+}
+
+/* Clear (C) */
+.clear {
+  background: linear-gradient(90deg, #92a3fd, #9dceff, #65c7f7);
+  color: #191970;
+  font-weight: 700;
+  animation: clrGlow 3s ease-in-out infinite;
+}
+@keyframes clrGlow {
+  0% {background-position: 0% 50%;}
+  50% {background-position: 100% 50%;}
+  100% {background-position: 0% 50%;}
+}
+
 .glow-btn {
   font-size: 21px;
   font-weight: 600;
   border: none;
   border-radius: 12px;
   padding: 14px 0;
+  background-size: 360% 360%;
   box-shadow: 0 0 6px #15d9ee, 0 0 8px #ffbe76 inset;
   transition: transform 0.12s, background 0.3s;
 }
-.glow-btn:active { transform: scale(0.96); }
-
-@keyframes numBtnGlow {
-  0%,100% {background-position: 0% 50%;}
-  50% {background-position: 100% 50%;}
-}
-@keyframes signBtnGlow {
-  0%,100% {background-position: 0% 50%;}
-  50% {background-position: 100% 50%;}
-}
-@keyframes eqBtnGlow {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-@keyframes clearBtnGlow {
-  0%,100% {background-position: 0% 50%;}
-  50% {background-position: 100% 50%;}
+.glow-btn:active {
+  transform: scale(0.96);
 }
 
 footer {
@@ -169,11 +185,17 @@ footer {
   box-shadow: 0px -2px 12px #ececec;
 }
 
-@media (max-width:600px) {
-  .calculator-container { width: 98vw; min-width: unset; padding: 8px 2vw 6px 2vw; }
-  #display { width: 97%; font-size: 21px; }
-  .sub-display { width: 97%; }
-  .calc-btns { grid-template-columns: repeat(4, 20vw); }
+@media (max-width:550px) {
+  .calculator-container {
+    width: 98vw;
+    min-width: unset;
+    padding: 10px 2vw 6px 2vw;
+  }
+  #display {
+    width: 97%;
+    font-size: 21px;
+  }
+  .calc-btns { grid-template-columns: repeat(4, 22vw); }
   .menu-btn { width: 92vw; font-size: 24px;}
 }
 
