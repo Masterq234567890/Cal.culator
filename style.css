@@ -68,22 +68,10 @@ body {
   background: #ededed;
   color: #222;
   border: 1.5px solid #c9c9cb;
-  margin-bottom: 4px;
+  margin-bottom: 14px;
   border-radius: 12px;
   text-align: right;
   outline: none;
-}
-
-.result-display {
-  width: 92%;
-  min-height: 22px;
-  font-size: 20px;
-  color: #858585;
-  background: none;
-  text-align: right;
-  margin-bottom: 8px;
-  opacity: 0.8;
-  font-family: inherit;
 }
 
 .calc-btns {
@@ -92,82 +80,46 @@ body {
   gap: 13px;
 }
 
-/* Numbers */
-.num-btn {
-  background: linear-gradient(120deg, #37dadc, #9fffa6, #2d5fff, #4588ff);
-  color: #fff;
-  animation: numGlow 4s linear infinite;
-}
-@keyframes numGlow {
-  0% {background-position: 0% 50%;}
-  50% {background-position: 100% 50%;}
-  100% {background-position: 0% 50%;}
-}
-
-/* Operators (+, −, ÷, ×) */
-.op-btn {
-  background: linear-gradient(120deg, #fa8d1a, #f85032, #f16f62);
-  color: #fff;
-  animation: opGlow 4s linear infinite;
-}
-@keyframes opGlow {
-  0% {background-position: 0% 50%;}
-  50% {background-position: 100% 50%;}
-  100% {background-position: 0% 50%;}
-}
-
-/* Equals */
-.equals {
-  background: linear-gradient(120deg, #26d0ce, #ffec6e, #96e6a1);
-  color: #222;
-  font-weight: 700;
-  grid-column: span 1;
-  animation: eqGlow 3s ease-in-out infinite;
-}
-@keyframes eqGlow {
-  0% {background-position: 15% 23%;}
-  50% {background-position: 100% 100%;}
-  100% {background-position: 15% 23%;}
-}
-
-/* Delete (X) */
-.delete {
-  background: linear-gradient(90deg, #ff6363, #d80032);
-  color: #fff;
-  font-weight: 700;
-  animation: delGlow 3s ease-in-out infinite;
-}
-@keyframes delGlow {
-  0% {background-position: 0% 0%;}
-  50% {background-position: 100% 100%;}
-  100% {background-position: 0% 0%;}
-}
-
-/* Clear (C) */
-.clear {
-  background: linear-gradient(90deg, #92a3fd, #9dceff, #65c7f7);
-  color: #191970;
-  font-weight: 700;
-  animation: clrGlow 3s ease-in-out infinite;
-}
-@keyframes clrGlow {
-  0% {background-position: 0% 50%;}
-  50% {background-position: 100% 50%;}
-  100% {background-position: 0% 50%;}
-}
-
 .glow-btn {
   font-size: 21px;
   font-weight: 600;
+  color: #fff;
   border: none;
   border-radius: 12px;
   padding: 14px 0;
+  background: linear-gradient(120deg, #38e4ae, #2098ff, #ff61c2, #ffc645);
   background-size: 360% 360%;
   box-shadow: 0 0 6px #15d9ee, 0 0 8px #ffbe76 inset;
+  animation: btnGlow 4s linear infinite;
   transition: transform 0.12s, background 0.3s;
 }
 .glow-btn:active {
   transform: scale(0.96);
+}
+
+@keyframes btnGlow {
+  0% {background-position: 0% 50%;}
+  50% {background-position: 100% 50%;}
+  100% {background-position: 0% 50%;}
+}
+
+.equals {
+  background: linear-gradient(95deg, #38ffbf, #2abfff);
+  color: #222;
+  font-weight: 700;
+  grid-column: span 1;
+}
+
+.delete {
+  background: linear-gradient(90deg, #ff6868, #faad6b);
+  color: #fff;
+  font-weight: 700;
+}
+
+.clear {
+  background: linear-gradient(90deg, #5652fc, #00e8fc);
+  color: #fff;
+  font-weight: 700;
 }
 
 footer {
