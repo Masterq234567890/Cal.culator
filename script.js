@@ -5,59 +5,53 @@ function openCalculator() {
 
 function addToDisplay(value) {
     const display = document.getElementById("display");
-    // Operator 'X' for multiplication, but use '*' for JS eval
-    if (value === "X") {
-        display.value += "×";
-    } else if (value === "÷") {
-        display.value += "÷";
-    } else if (value === "−") {
-        display.value += "-";
-    } else {
-        display.value += value;
-    }
-    showResult();
+    // Multiplication: insert proper symbol  
+    if(value === "×") display.value += "×";
+    else if(value === "÷") display.value += "÷";
+    else display.value += value;
+    showPreview();
 }
 
 function calculate() {
     const display = document.getElementById("display");
-    const expression = display.value.replace(/×/g, '*').replace(/÷/g, '/');
     try {
-        let result = eval(expression);
-        display.value = result;
-        document.getElementById("result").textContent = "";
+        let expr = display.value.replace(/×/g, "*").replace(/÷/g, "/");
+        display.value = eval(expr);
+        showPreview(); // Update preview with answer
     } catch {
         display.value = "Error";
-        document.getElementById("result").textContent = "";
+        document.getElementById("preview").innerText = "";
     }
 }
 
 function clearDisplay() {
     document.getElementById("display").value = "";
-    document.getElementById("result").textContent = "";
+    document.getElementById("preview").innerText = "";
 }
 
 function deleteOne() {
     const display = document.getElementById("display");
     display.value = display.value.slice(0, -1);
-    showResult();
+    showPreview();
 }
 
-function showResult() {
+function showPreview() {
     const display = document.getElementById("display");
-    const expression = display.value.replace(/×/g, '*').replace(/÷/g, '/');
-    let result = "";
+    const preview = document.getElementById("preview");
+    let expr = display.value.replace(/×/g, "*").replace(/÷/g, "/");
+    let ans = "";
     try {
-        if (expression && /[0-9)]$/.test(expression)) {
-            result = eval(expression);
-            if (result !== undefined) {
-                document.getElementById("result").textContent = result;
+        if (expr.trim() !== "") {
+            ans = eval(expr);
+            if (typeof ans !== 'undefined' && ans !== null && ans !== "" && !isNaN(ans)) {
+                preview.innerText = ans;
             } else {
-                document.getElementById("result").textContent = "";
+                preview.innerText = "";
             }
         } else {
-            document.getElementById("result").textContent = "";
+            preview.innerText = "";
         }
     } catch {
-        document.getElementById("result").textContent = "";
+        preview.innerText = "";
     }
 }
