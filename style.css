@@ -38,8 +38,6 @@ body {
   padding: 22px 0;
   border-radius: 30px;
   letter-spacing: 1px;
-  background: linear-gradient(110deg, #2af598, #009efd);
-  box-shadow: 0 0 14px #e7e7e7;
 }
 
 .center-container {
@@ -64,31 +62,27 @@ body {
 
 #display {
   width: 92%;
-  height: 48px;
-  padding: 10px 10px 0 10px;
+  height: 54px;
+  padding: 10px 10px;
   font-size: 26px;
-  background: #18191a;
-  color: #fff;
-  border: 1.5px solid #dedede;
-  margin-bottom: 0px;
-  border-radius: 15px 15px 0 0;
+  background: #ededed;
+  color: #222;
+  border: 1.5px solid #c9c9cb;
+  margin-bottom: 7px;
+  border-radius: 12px;
   text-align: right;
   outline: none;
 }
 
-.preview {
+.sub-display {
   width: 92%;
   min-height: 22px;
-  background: #171717;
-  color: #cfcfcf;
+  color: #888;
   font-size: 18px;
-  opacity: 0.7;
-  border-radius: 0 0 15px 15px;
   text-align: right;
-  margin-bottom: 15px;
-  padding: 3px 10px 6px 0;
+  margin-bottom: 8px;
   letter-spacing: 1px;
-  font-weight: 600;
+  opacity: 0.9;
 }
 
 .calc-btns {
@@ -97,84 +91,67 @@ body {
   gap: 13px;
 }
 
-/* Number buttons with unique gradient */
+/* Number buttons: Cyan, blue to purple changing */
 .num-btn {
-  font-size: 21px;
-  font-weight: 600;
-  color: #fff;
-  border: none;
-  border-radius: 12px;
-  padding: 14px 0;
-  background: linear-gradient(145deg, #4bcffa, #7df89d, #FFD360, #fa7777);
-  background-size: 230% 350%;
-  animation: numGlow 3s linear infinite;
-  transition: transform 0.12s, background 0.3s;
-  box-shadow: 0 0 8px #bce8f4 inset;
+  background: linear-gradient(120deg, #00eaff, #1687e8, #a259f7, #44ffd1);
+  background-size: 300% 300%;
+  animation: numBtnGlow 4s linear infinite;
+  color: #fff !important;
 }
 
-@keyframes numGlow { 
-  0%{background-position:0% 50%;}
-  50%{background-position:100% 50%;}
-  100%{background-position:0% 50%;}
-}
-
-/* Sign buttons */
+/* Signs: dark black, blue glow */
 .sign-btn {
+  background: linear-gradient(120deg, #23272f, #44547a, #333e47);
+  box-shadow: 0 0 4px #2fbfff, 0 0 10px #abb9d2 inset;
+  color: #fbe9c2 !important;
+  background-size: 280% 280%;
+  animation: signBtnGlow 3s linear infinite;
+}
+
+/* Equals: brown-orange-yellow changing */
+.equals-btn {
+  background: linear-gradient(115deg, #a66d3a, #d1b059, #f3ca9b, #e29538);
+  color: #fff;
+  background-size: 200% 200%;
+  animation: eqBtnGlow 6s linear infinite;
+}
+
+/* Clear & Delete: Bright red-pink changing */
+.clear-btn, .delete-btn {
+  background: linear-gradient(100deg, #F64646, #ff0057, #f59595, #e06238);
+  color: #fff !important;
+  background-size: 290% 290%;
+  animation: clearBtnGlow 2.8s linear infinite;
+}
+
+/* Glow Button Common */
+.glow-btn {
   font-size: 21px;
   font-weight: 600;
   border: none;
   border-radius: 12px;
   padding: 14px 0;
-  background: linear-gradient(125deg, #282828, #4d4d4d, #444 100%);
-  color: #fff;
-  animation: signColour 2.5s ease-in-out infinite;
-  box-shadow: 0 0 8px #dedede inset;
+  box-shadow: 0 0 6px #15d9ee, 0 0 8px #ffbe76 inset;
   transition: transform 0.12s, background 0.3s;
 }
+.glow-btn:active { transform: scale(0.96); }
 
-@keyframes signColour {
-  0%{background-position:0% 50%;}
-  50%{background-position:100% 50%;}
-  100%{background-position:0% 50%;}
+@keyframes numBtnGlow {
+  0%,100% {background-position: 0% 50%;}
+  50% {background-position: 100% 50%;}
 }
-
-/* Equals (=) button - brownish */
-.equals-btn {
-  background: linear-gradient(110deg, #b37830, #82491e, #d88c2d, #f7ce68 90%);
-  color: #fff;
-  font-weight: bold;
-  font-size: 22px;
-  border-radius: 12px;
-  box-shadow: 0 0 6px #bc9877 inset;
-  animation: equalsGlow 3s ease-in-out infinite;
-  grid-column: span 1;
-  transition: transform 0.12s, background 0.3s;
+@keyframes signBtnGlow {
+  0%,100% {background-position: 0% 50%;}
+  50% {background-position: 100% 50%;}
 }
-@keyframes equalsGlow {
-  0%{background-position:0% 50%;}
-  50%{background-position:100% 50%;}
-  100%{background-position:0% 50%;}
+@keyframes eqBtnGlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
-
-/* Delete/clear buttons - red */
-.delete-btn, .clear-btn {
-  background: linear-gradient(110deg, #d7263d, #f46036 90%);
-  color: #fff;
-  font-weight: bold;
-  font-size: 20px;
-  border-radius: 12px;
-  box-shadow: 0 0 7px #fdadad inset;
-  animation: cDelGlow 2s ease-in-out infinite;
-  transition: transform 0.12s, background 0.3s;
-}
-@keyframes cDelGlow {
-  0% {background-position: 0% 50%;}
-  50%{background-position:100% 50%;}
-  100%{background-position:0% 50%;}
-}
-
-.num-btn:active, .sign-btn:active, .equals-btn:active, .delete-btn:active, .clear-btn:active {
-  transform: scale(0.96);
+@keyframes clearBtnGlow {
+  0%,100% {background-position: 0% 50%;}
+  50% {background-position: 100% 50%;}
 }
 
 footer {
@@ -192,15 +169,11 @@ footer {
   box-shadow: 0px -2px 12px #ececec;
 }
 
-@media (max-width:550px) {
-  .calculator-container {
-    width: 98vw;
-    min-width: unset;
-    padding: 10px 2vw 6px 2vw;
-  }
+@media (max-width:600px) {
+  .calculator-container { width: 98vw; min-width: unset; padding: 8px 2vw 6px 2vw; }
   #display { width: 97%; font-size: 21px; }
-  .preview { width: 97%; font-size: 15px;}
-  .calc-btns { grid-template-columns: repeat(4, 22vw); }
+  .sub-display { width: 97%; }
+  .calc-btns { grid-template-columns: repeat(4, 20vw); }
   .menu-btn { width: 92vw; font-size: 24px;}
 }
 
