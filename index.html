@@ -22,24 +22,24 @@
     <div class="calculator-container">
       <input type="text" id="display" disabled />
       <div class="calc-btns">
+        <button onclick="clearDisplay()" class="glow-btn clear-btn">C</button>
+        <button onclick="backspace()" class="glow-btn">X</button>
+        <button onclick="addToDisplay('/')" class="glow-btn">/</button>
+        <button onclick="addToDisplay('*')" class="glow-btn">*</button>
         <button onclick="addToDisplay('7')" class="glow-btn">7</button>
         <button onclick="addToDisplay('8')" class="glow-btn">8</button>
         <button onclick="addToDisplay('9')" class="glow-btn">9</button>
-        <button onclick="addToDisplay('/')" class="glow-btn">/</button>
+        <button onclick="addToDisplay('-')" class="glow-btn">-</button>
         <button onclick="addToDisplay('4')" class="glow-btn">4</button>
         <button onclick="addToDisplay('5')" class="glow-btn">5</button>
         <button onclick="addToDisplay('6')" class="glow-btn">6</button>
-        <button onclick="addToDisplay('*')" class="glow-btn">*</button>
+        <button onclick="addToDisplay('+')" class="glow-btn">+</button>
         <button onclick="addToDisplay('1')" class="glow-btn">1</button>
         <button onclick="addToDisplay('2')" class="glow-btn">2</button>
         <button onclick="addToDisplay('3')" class="glow-btn">3</button>
-        <button onclick="addToDisplay('-')" class="glow-btn">-</button>
-        <button onclick="addToDisplay('0')" class="glow-btn">0</button>
-        <button onclick="addToDisplay('.')" class="glow-btn">.</button>
-        <button onclick="addToDisplay('+')" class="glow-btn">+</button>
         <button onclick="calculate()" class="glow-btn equals">=</button>
-        <button onclick="deleteOne()" class="glow-btn delete">X</button>
-        <button onclick="clearDisplay()" class="glow-btn clear">C</button>
+        <button onclick="addToDisplay('0')" class="glow-btn zero-btn">0</button>
+        <button onclick="addToDisplay('.')" class="glow-btn">.</button>
       </div>
     </div>
   </div>
