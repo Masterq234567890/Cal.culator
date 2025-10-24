@@ -5,53 +5,63 @@ function openCalculator() {
 
 function addToDisplay(value) {
     const display = document.getElementById("display");
-    // Multiplication: insert proper symbol  
-    if(value === "×") display.value += "×";
-    else if(value === "÷") display.value += "÷";
-    else display.value += value;
-    showPreview();
+    display.value += value;
+    updateSubDisplay();
+}
+
+function addSign(sign) {
+    const display = document.getElementById("display");
+    if (sign === 'X') {
+        display.value += 'X';
+    } else if (sign === '÷') {
+        display.value += '÷';
+    } else {
+        display.value += sign;
+    }
+    updateSubDisplay();
 }
 
 function calculate() {
     const display = document.getElementById("display");
+    let input = display.value.replace(/÷/g, '/').replace(/X/g, '*');
     try {
-        let expr = display.value.replace(/×/g, "*").replace(/÷/g, "/");
-        display.value = eval(expr);
-        showPreview(); // Update preview with answer
+        let res = eval(input);
+        display.value = res;
+        document.getElementById("subDisplay").innerText = '';
     } catch {
         display.value = "Error";
-        document.getElementById("preview").innerText = "";
+        document.getElementById("subDisplay").innerText = '';
     }
 }
 
 function clearDisplay() {
     document.getElementById("display").value = "";
-    document.getElementById("preview").innerText = "";
+    document.getElementById("subDisplay").innerText = "";
 }
 
 function deleteOne() {
     const display = document.getElementById("display");
     display.value = display.value.slice(0, -1);
-    showPreview();
+    updateSubDisplay();
 }
 
-function showPreview() {
+function updateSubDisplay() {
     const display = document.getElementById("display");
-    const preview = document.getElementById("preview");
-    let expr = display.value.replace(/×/g, "*").replace(/÷/g, "/");
-    let ans = "";
+    let input = display.value.replace(/÷/g, '/').replace(/X/g, '*');
+    let subDisplay = document.getElementById("subDisplay");
     try {
-        if (expr.trim() !== "") {
-            ans = eval(expr);
-            if (typeof ans !== 'undefined' && ans !== null && ans !== "" && !isNaN(ans)) {
-                preview.innerText = ans;
+        // Only if input is safe and not empty and ends with number
+        if (/^[.d+-*/÷X ]+$/.test(display.value) && /d$/.test(display.value)) {
+            let result = eval(input);
+            if (result !== undefined && display.value!=="") {
+                subDisplay.innerText = result;
             } else {
-                preview.innerText = "";
+                subDisplay.innerText = "";
             }
         } else {
-            preview.innerText = "";
+            subDisplay.innerText = "";
         }
     } catch {
-        preview.innerText = "";
+        subDisplay.innerText = "";
     }
 }
