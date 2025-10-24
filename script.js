@@ -3,75 +3,61 @@ function openCalculator() {
     document.getElementById("calculatorSection").style.display = "flex";
 }
 
-// Adds numbers/dot to display and updates preview
 function addToDisplay(value) {
     const display = document.getElementById("display");
-    display.value += value;
-    updateSubDisplay();
+    // Operator 'X' for multiplication, but use '*' for JS eval
+    if (value === "X") {
+        display.value += "×";
+    } else if (value === "÷") {
+        display.value += "÷";
+    } else if (value === "−") {
+        display.value += "-";
+    } else {
+        display.value += value;
+    }
+    showResult();
 }
 
-// Handles all sign buttons (including X and ÷)
-function addSign(sign) {
-    const display = document.getElementById("display");
-    display.value += sign;
-    updateSubDisplay();
-}
-
-// Main equals operation
 function calculate() {
     const display = document.getElementById("display");
-    let result = getResult(display.value);
-    if (result === undefined || result === null || result === "") {
-        display.value = "Error";
-    } else {
+    const expression = display.value.replace(/×/g, '*').replace(/÷/g, '/');
+    try {
+        let result = eval(expression);
         display.value = result;
+        document.getElementById("result").textContent = "";
+    } catch {
+        display.value = "Error";
+        document.getElementById("result").textContent = "";
     }
-    document.getElementById("subDisplay").innerText = '';
 }
 
-// Clears full entry and live preview
 function clearDisplay() {
     document.getElementById("display").value = "";
-    document.getElementById("subDisplay").innerText = "";
+    document.getElementById("result").textContent = "";
 }
 
-// Removes last entry and updates preview
 function deleteOne() {
     const display = document.getElementById("display");
     display.value = display.value.slice(0, -1);
-    updateSubDisplay();
+    showResult();
 }
 
-// Returns final result of string, replaces friendly signs for JS
-function getResult(expr) {
-    if (!expr) return "";
-    try {
-        let toEval = expr.replace(/÷/g, "/").replace(/X/g, "*");
-        // Prevent invalid last char like sign
-        if (/[*+/-.]$/.test(toEval)) return "";
-        let res = Function('"use strict";return (' + toEval + ")")();
-        return res;
-    } catch {
-        return "";
-    }
-}
-
-// Updates pre-result below the main
-function updateSubDisplay() {
+function showResult() {
     const display = document.getElementById("display");
-    let subDisplay = document.getElementById("subDisplay");
-    let val = display.value;
-
-    // Check for valid safe calc input only
-    let result = getResult(val);
-    if (
-        val.length &&
-        !isNaN(result) &&
-        result !== "" &&
-        !/[+-X÷.]$/.test(val) // Don't show pre-result on incomplete expressions
-    ) {
-        subDisplay.innerText = result;
-    } else {
-        subDisplay.innerText = "";
+    const expression = display.value.replace(/×/g, '*').replace(/÷/g, '/');
+    let result = "";
+    try {
+        if (expression && /[0-9)]$/.test(expression)) {
+            result = eval(expression);
+            if (result !== undefined) {
+                document.getElementById("result").textContent = result;
+            } else {
+                document.getElementById("result").textContent = "";
+            }
+        } else {
+            document.getElementById("result").textContent = "";
+        }
+    } catch {
+        document.getElementById("result").textContent = "";
     }
 }
