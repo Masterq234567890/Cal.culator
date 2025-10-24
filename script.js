@@ -3,65 +3,75 @@ function openCalculator() {
     document.getElementById("calculatorSection").style.display = "flex";
 }
 
+// Adds numbers/dot to display and updates preview
 function addToDisplay(value) {
     const display = document.getElementById("display");
     display.value += value;
     updateSubDisplay();
 }
 
+// Handles all sign buttons (including X and ÷)
 function addSign(sign) {
     const display = document.getElementById("display");
-    if (sign === 'X') {
-        display.value += 'X';
-    } else if (sign === '÷') {
-        display.value += '÷';
-    } else {
-        display.value += sign;
-    }
+    display.value += sign;
     updateSubDisplay();
 }
 
+// Main equals operation
 function calculate() {
     const display = document.getElementById("display");
-    let input = display.value.replace(/÷/g, '/').replace(/X/g, '*');
-    try {
-        let res = eval(input);
-        display.value = res;
-        document.getElementById("subDisplay").innerText = '';
-    } catch {
+    let result = getResult(display.value);
+    if (result === undefined || result === null || result === "") {
         display.value = "Error";
-        document.getElementById("subDisplay").innerText = '';
+    } else {
+        display.value = result;
     }
+    document.getElementById("subDisplay").innerText = '';
 }
 
+// Clears full entry and live preview
 function clearDisplay() {
     document.getElementById("display").value = "";
     document.getElementById("subDisplay").innerText = "";
 }
 
+// Removes last entry and updates preview
 function deleteOne() {
     const display = document.getElementById("display");
     display.value = display.value.slice(0, -1);
     updateSubDisplay();
 }
 
+// Returns final result of string, replaces friendly signs for JS
+function getResult(expr) {
+    if (!expr) return "";
+    try {
+        let toEval = expr.replace(/÷/g, "/").replace(/X/g, "*");
+        // Prevent invalid last char like sign
+        if (/[*+/-.]$/.test(toEval)) return "";
+        let res = Function('"use strict";return (' + toEval + ")")();
+        return res;
+    } catch {
+        return "";
+    }
+}
+
+// Updates pre-result below the main
 function updateSubDisplay() {
     const display = document.getElementById("display");
-    let input = display.value.replace(/÷/g, '/').replace(/X/g, '*');
     let subDisplay = document.getElementById("subDisplay");
-    try {
-        // Only if input is safe and not empty and ends with number
-        if (/^[.d+-*/÷X ]+$/.test(display.value) && /d$/.test(display.value)) {
-            let result = eval(input);
-            if (result !== undefined && display.value!=="") {
-                subDisplay.innerText = result;
-            } else {
-                subDisplay.innerText = "";
-            }
-        } else {
-            subDisplay.innerText = "";
-        }
-    } catch {
+    let val = display.value;
+
+    // Check for valid safe calc input only
+    let result = getResult(val);
+    if (
+        val.length &&
+        !isNaN(result) &&
+        result !== "" &&
+        !/[+-X÷.]$/.test(val) // Don't show pre-result on incomplete expressions
+    ) {
+        subDisplay.innerText = result;
+    } else {
         subDisplay.innerText = "";
     }
 }
