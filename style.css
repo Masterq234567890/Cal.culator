@@ -93,7 +93,6 @@ body {
   animation: btnGlow 4s linear infinite;
   transition: transform 0.12s, background 0.3s;
 }
-
 .glow-btn:active {
   transform: scale(0.96);
 }
@@ -105,12 +104,22 @@ body {
 }
 
 .equals {
-  grid-column: span 1;
   background: linear-gradient(95deg, #38ffbf, #2abfff);
   color: #222;
   font-weight: 700;
-  box-shadow: 0 0 12px #75fff0, 0 0 8px #edf1f5 inset;
-  animation: btnGlow 3s ease-in-out infinite;
+  grid-column: span 1;
+}
+
+.delete {
+  background: linear-gradient(90deg, #ff6868, #faad6b);
+  color: #fff;
+  font-weight: 700;
+}
+
+.clear {
+  background: linear-gradient(90deg, #5652fc, #00e8fc);
+  color: #fff;
+  font-weight: 700;
 }
 
 footer {
