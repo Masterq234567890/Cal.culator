@@ -1,70 +1,81 @@
-function openCalculator() {
-    document.getElementById("mainMenu").style.display = "none";
-    document.getElementById("calculatorSection").style.display = "flex";
+let expression = '';
+let result = '0';
+
+// Open Calculator Button
+document.getElementById('openCalcBtn').addEventListener('click', function() {
+    document.getElementById('calculatorContainer').classList.remove('hidden');
+});
+
+// Close calculator on clicking outside
+document.getElementById('calculatorContainer').addEventListener('click', function(e) {
+    if (e.target === this) {
+        this.classList.add('hidden');
+    }
+});
+
+function appendNumber(num) {
+    if (result === '0' || result === 'Error') {
+        result = num;
+    } else {
+        result += num;
+    }
+    expression += num;
+    updateDisplay();
 }
 
-// Replace 'X' button click with '*'
-function addToDisplay(value) {
-    const display = document.getElementById("display");
-    if (value === 'X') {
-        display.value += '*';
-    } else {
-        display.value += value;
+function appendOperator(op) {
+    if (expression !== '' && result !== 'Error') {
+        if (['+', '−', '×', '÷', '%'].includes(expression[expression.length - 1])) {
+            expression = expression.slice(0, -1);
+        }
+        expression += op;
+        result = '0';
+        updateDisplay();
     }
-    updateLiveTotal(); // update total below display
 }
 
 function calculate() {
-    const display = document.getElementById("display");
     try {
-        display.value = eval(display.value.replace(/[^0-9/*+-.()]/g, ''));
-    } catch {
-        display.value = "Error";
+        let calcExpression = expression
+            .replace(/×/g, '*')
+            .replace(/÷/g, '/')
+            .replace(/−/g, '-');
+        
+        result = eval(calcExpression).toString();
+        expression = result;
+        updateDisplay();
+    } catch (error) {
+        result = 'Error';
+        updateDisplay();
     }
-    updateLiveTotal();
 }
 
-function clearDisplay() {
-    document.getElementById("display").value = "";
-    updateLiveTotal();
+function clearAll() {
+    expression = '';
+    result = '0';
+    updateDisplay();
 }
 
-function deleteOne() {
-    const display = document.getElementById("display");
-    display.value = display.value.slice(0, -1);
-    updateLiveTotal();
-}
-
-// Show live total just under display
-function updateLiveTotal() {
-    const display = document.getElementById("display");
-    const total = document.getElementById("live-total");
-    let val = display.value;
-    // Don't show if empty or ends with operator
-    if (!val.trim()) {
-        total.textContent = '';
-        return;
+function clearEntry() {
+    if (expression.length > 0) {
+        expression = expression.slice(0, -1);
+        result = expression || '0';
+        updateDisplay();
     }
-    // replace all X with * before eval (just in case)
-    let expression = val.replace(/X/g, '*');
-    try {
-        // Only show if last char is not operator
-        if (/[d)]$/.test(expression)) {
-            // safe eval, only numbers, ., (, ), +, -, *, /
-            if (/^[0-9+-*/.() ]+$/.test(expression)) {
-                let result = eval(expression);
-                if (typeof result === "number" && isFinite(result)) {
-                    total.textContent = result;
-                } else {
-                    total.textContent = '';
-                }
-            } else {
-                total.textContent = '';
-            }
+}
+
+function toggleSign() {
+    if (result !== '0' && result !== 'Error') {
+        if (result[0] === '-') {
+            result = result.slice(1);
         } else {
-            total.textContent = '';
+            result = '-' + result;
         }
-    } catch {
-        total.textContent = '';
+        updateDisplay();
     }
+}
+
+function updateDisplay() {
+    document.getElementById('expression').textContent = expression || '';
+    document.getElementById('result').textContent = result;
 }
